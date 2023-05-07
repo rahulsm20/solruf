@@ -5,5 +5,5 @@ import auth from '../middleware/auth'
 router.get('/',auth,getAssets)
 router.post('/add',auth,addAsset)
 router.delete('/delete',auth,deleteAsset)
-router.patch('/patch',auth,updateAsset)
+router.put('/update',auth,updateAsset)
 export default router

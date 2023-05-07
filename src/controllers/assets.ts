@@ -44,7 +44,7 @@ export const getAssets = async(req:Request,res:Response): Promise<void> => {
 }
 
 export const updateAsset = async(req:Request,res:Response)=>{
-    const {amount,category}=req.query
+    const {amount,category}=req.body
     db.query("UPDATE assets SET amount=? WHERE category=?",[amount,category],   
     (err,result)=>{
         if(err)
