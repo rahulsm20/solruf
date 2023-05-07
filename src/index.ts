@@ -17,5 +17,6 @@ catch{
 
 app.use('/assets',assets)
 app.use('/users',users)
+app.use('/',(req,res)=>res.json('Home'))
 
 export default app
