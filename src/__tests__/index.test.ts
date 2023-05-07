@@ -4,7 +4,7 @@ import app from "../index";
 describe("User endpoints",()=>{
   describe("POST /users/signin", () => {
     const userData = {
-      email: "user1@gmail.com",
+      email: "user10@gmail.com",
       password: "password123",
     };
     
@@ -31,14 +31,14 @@ describe("User endpoints",()=>{
     .send({ email: userData.email, password: "wrongpassword" });
     expect(response.statusCode).toBe(404);
   });
-});
-
-describe("POST /users/signup", () => {
-  test("should respond with a 200 status code and a success message when a user is successfully signed up", async () => {
-    const response = await request(app)
-    .post("/users/signup")
-    .send({ email: "user0@gmail.com", password: "password123" });
-    
+  
+  describe("POST /users/signup", () => {
+    test("should respond with a 200 status code and a success message when a user is successfully signed up", async () => {
+      const userId=Math.random()
+      const response = await request(app)
+      .post("/users/signup")
+      .send({ email: `user${userId}@gmail.com`, password: "password123" });
+      
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({ message: "New user added" });
   });
@@ -55,92 +55,93 @@ describe("POST /users/signup", () => {
 })
 
 describe('Asset endpoints', () => {
-  let token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE2ODM0NTgxMDAsImV4cCI6MTY4MzQ2MTcwMH0.1msgsbEOQ4UMvo-BHN-ap_BYZSx9gtXBLG0xuVZZtpU"
-
+  let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxMEBnbWFpbC5jb20iLCJpZCI6NCwiaWF0IjoxNjgzNDYzNTU2LCJleHAiOjE2ODM0NjcxNTZ9.dMgO5leGukfYGM_AMtLP2Sk99mmmh52hrmBeM5UB1xk"
+  
   // login before each test
   beforeEach(async () => {
     const response = await request(app)
-      .post('/users/signin')
-      .send({
-        email: 'user1@gmail.com',
-        password: 'password123'
-      })
+    .post('/users/signin')
+    .send({
+      email: 'user10@gmail.com',
+      password: 'password123'
+    })
     token = response.body.token
   })
-
+  
   describe('GET /assets/', () => {
     test('should respond with 401 status code if no token is provided', async () => {
       const response = await request(app)
-        .get('/assets/')
+      .get('/assets/')
       expect(response.statusCode).toBe(401)
     })
-
+    
     test('should respond with 202 status code if token is provided', async () => {
       const response = await request(app)
-        .get('/assets')
-        .set('Authorization', `Bearer ${token}`)
+      .get('/assets')
+      .set('Authorization', `Bearer ${token}`)
       expect(response.statusCode).toBe(202)
     })
   })
-
+  
   describe('POST /assets/add', () => {
     test('should respond with 401 status code if no token is provided', async () => {
       const response = await request(app)
-        .post('/assets/add')
-        .send({
-          category: 'Real Estate',
-          amount: 500000
-        })
+      .post('/assets/add')
+      .send({
+        category: 'Real Estate',
+        amount: 500000
+      })
       expect(response.statusCode).toBe(401)
     })
-
+    
     test('should respond with 202 status code if token is provided', async () => {
       const response = await request(app)
-        .post('/assets/add')
-        .set('Authorization', `Bearer ${token}`)
-        .send({
-          category: 'Real Estate',
-          amount: 500000
-        })
+      .post('/assets/add')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        category: 'Real Estate',
+        amount: 500000
+      })
       expect(response.statusCode).toBe(202)
     })
   })
-
+  
   describe('PUT /assets/:category', () => {
     test('should respond with 401 status code if no token is provided', async () => {
       const response = await request(app)
-        .put('/assets/update')
-        .send({
+      .put('/assets/update')
+      .send({
           category:"Real Estate",
           amount: 700000
         })
-      expect(response.statusCode).toBe(401)
-    })
-
-    test('should respond with 202 status code if token is provided', async () => {
-      const response = await request(app)
+        expect(response.statusCode).toBe(401)
+      })
+      
+      test('should respond with 202 status code if token is provided', async () => {
+        const response = await request(app)
         .put('/assets/update')
         .set('Authorization', `${token}`)
         .send({
           category:"Real Estate",
           amount: 700000
         })
-      expect(response.statusCode).toBe(202)
+        expect(response.statusCode).toBe(202)
+      })
     })
-  })
-
-  describe('DELETE /assets', () => {
-    test('should respond with 404 status code if no token is provided', async () => {
-      const response = await request(app)
+    
+    describe('DELETE /assets', () => {
+      test('should respond with 404 status code if no token is provided', async () => {
+        const response = await request(app)
         .delete('/assets/delete?category=Real Estate')
-      expect(response.statusCode).toBe(401)
-    })
-
-    test('should respond with 202 status code if token is provided', async () => {
+        expect(response.statusCode).toBe(401)
+      })
+      
+      test('should respond with 202 status code if token is provided', async () => {
       const response = await request(app)
         .delete('/assets/delete?category=Real Estate')
         .set('Authorization', `${token}`)
-      expect(response.statusCode).toBe(202)
+        expect(response.statusCode).toBe(202)
+      })
     })
   })
-})
+});

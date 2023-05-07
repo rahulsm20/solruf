@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "build": "tsc",
     "dev": "ts-node-dev --respawn src/index.ts"
   },
