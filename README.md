@@ -1,7 +1,18 @@
-## API Documentation
+# API Documentation
+## Tech stack
+* Typescript
+* Node.js
+* ExpressJS
+* Testing
+  * Jest
+  * Supertest
+* Database
+  * MySQL
 
+
+## Endpoints
 ### /assets
-* `GET /assets` - Retrieve all assets
+* `GET /assets/` - Retrieve all assets
   * Auth: Required
   * Response: `200 OK`
   ```
@@ -21,7 +32,7 @@
     * `401 Unauthorized` - If user is not authenticated
     * `500 Internal Server Error` - If server encounters an error while retrieving assets
 
-* `POST /assets` - Add a new asset
+* `POST /assets/add` - Add a new asset
   * Auth: Required
   * Request body:
   ```
@@ -41,11 +52,18 @@
     * `400 Bad Request` - If request body is invalid or missing fields
     * `500 Internal Server Error` - If server encounters an error while adding asset
 
-* `PUT /assets?category={category}&amount={amount}` - Update an asset
+* `PUT /assets/update` - Update an asset
   * Auth: Required
-  * Request query parameters:
+  * Request parameters:
     * `category`: The category of the asset to be updated
     * `amount`: The new amount for the asset
+  * Request body:
+  ```
+  {
+    "category": "savings",
+    "amount": 10000
+  }
+  ```
   * Response: `202 Accepted`
   ```
   {
@@ -108,3 +126,4 @@
       "password": "$2b$10$w6jKTY6CQYceZiURRZQXYeI0NlLjxdCT1z4Tkq3BqPkkB0.lYFnhS"
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+  }
