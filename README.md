@@ -10,6 +10,10 @@
 * Database
   * MySQL
 
+### Successful test
+
+![](https://user-images.githubusercontent.com/77540672/236679275-2567521a-66c1-4403-8437-d529d004476c.png)
+
 
 ## Endpoints
 ### /assets
