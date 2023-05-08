@@ -9,6 +9,8 @@
   * Supertest
 * Database
   * MySQL
+* Authentication 
+  * JWT
 
 ### Steps to use the API
 1. Register using the /users/signup route.
@@ -17,8 +19,6 @@
 Note: Sign in tokens expire after 1 hour.
 
 ## Endpoints
-
-
 ### /users
 * `POST /users/signup` - Sign up a new user
   * Request body:
