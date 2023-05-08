@@ -1,6 +1,6 @@
 # API Documentation 
 ### [Live endpoint](https://typescript-express-api.vercel.app/)
-## Tech stack
+### Tech stack
 * Typescript
 * Node.js
 * ExpressJS
@@ -10,12 +10,51 @@
 * Database
   * MySQL
 
-### Successful test
-
-![](https://user-images.githubusercontent.com/77540672/236679275-2567521a-66c1-4403-8437-d529d004476c.png)
-
+### Steps to use the API
+1. Register using the /users/signup route.
+2. Grab the token and use it as the Authorization header to sign in.
+3. Sign in and uses /assets/ routes to add, delete, update or read assets.
+Note: Sign in tokens expire after 1 hour.
 
 ## Endpoints
+
+
+### /users
+* `POST /users/signup` - Sign up a new user
+  * Request body:
+  ```
+  {
+    "email": "user@example.com",
+    "password": "password"
+  }
+  ```
+  * Response: `200 OK`
+  ```
+  {
+    "message": "New user added"
+  }
+  ```
+  * Errors:
+    * `400 Bad Request` - If request body is invalid or missing fields
+    * `500 Internal Server Error` - If server encounters an error while signing up user
+
+* `POST /users/signin` - Sign in a user
+  * Request body:
+  ```
+  {
+    "email": "user@example.com",
+    "password": "password"
+  }
+  ```
+  * Response: `200 OK`
+  ```
+  {
+    "result": {
+      "id": 1,
+      "email": "user@example.com",
+      "password": "$2b$10$w6jKTY6CQYceZiURRZQXYeI0NlLjxdCT1z4Tkq3BqPkkB0.lYFnhS"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ### /assets
 * `GET /assets/` - Retrieve all assets
   * Auth: Required
@@ -95,40 +134,7 @@
     * `400 Bad Request` - If query parameters are invalid or missing
     * `500 Internal Server Error` - If server encounters an error while deleting asset
 
-### /users
-* `POST /users/signup` - Sign up a new user
-  * Request body:
-  ```
-  {
-    "email": "user@example.com",
-    "password": "password"
-  }
-  ```
-  * Response: `200 OK`
-  ```
-  {
-    "message": "New user added"
-  }
-  ```
-  * Errors:
-    * `400 Bad Request` - If request body is invalid or missing fields
-    * `500 Internal Server Error` - If server encounters an error while signing up user
+### Successful test
 
-* `POST /users/signin` - Sign in a user
-  * Request body:
-  ```
-  {
-    "email": "user@example.com",
-    "password": "password"
-  }
-  ```
-  * Response: `200 OK`
-  ```
-  {
-    "result": {
-      "id": 1,
-      "email": "user@example.com",
-      "password": "$2b$10$w6jKTY6CQYceZiURRZQXYeI0NlLjxdCT1z4Tkq3BqPkkB0.lYFnhS"
-    },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+![](https://user-images.githubusercontent.com/77540672/236679275-2567521a-66c1-4403-8437-d529d004476c.png)
   }
