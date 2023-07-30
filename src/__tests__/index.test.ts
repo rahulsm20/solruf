@@ -4,7 +4,7 @@ import app from "../index";
 describe("User endpoints",()=>{
   describe("POST /users/signin", () => {
     const userData = {
-      email: "user10@gmail.com",
+      email: "user2@gmail.com",
       password: "password123",
     };
     
@@ -55,14 +55,14 @@ describe("User endpoints",()=>{
 })
 
 describe('Asset endpoints', () => {
-  let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxMEBnbWFpbC5jb20iLCJpZCI6NCwiaWF0IjoxNjgzNDYzNTU2LCJleHAiOjE2ODM0NjcxNTZ9.dMgO5leGukfYGM_AMtLP2Sk99mmmh52hrmBeM5UB1xk"
+  let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIyQGdtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE2ODQyMzA3NTIsImV4cCI6MTY4NDIzNDM1Mn0.--rGxZc4GwwM4ViSE76Yy5QYPxLE6N_jsJo-mh9uaU8"
   
   // login before each test
   beforeEach(async () => {
     const response = await request(app)
     .post('/users/signin')
     .send({
-      email: 'user10@gmail.com',
+      email: 'user2@gmail.com',
       password: 'password123'
     })
     token = response.body.token

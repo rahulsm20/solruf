@@ -1,4 +1,4 @@
-# API Documentation 
+# Typescript ExpressJS API  
 ### [Live endpoint](https://typescript-express-api.vercel.app/)
 ### Tech stack
 * Typescript
@@ -54,7 +54,7 @@ Note: Sign in tokens expire after 1 hour.
       "email": "user@example.com",
       "password": "$2b$10$w6jKTY6CQYceZiURRZQXYeI0NlLjxdCT1z4Tkq3BqPkkB0.lYFnhS"
     },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 ### /assets
 * `GET /assets/` - Retrieve all assets
   * Auth: Required
